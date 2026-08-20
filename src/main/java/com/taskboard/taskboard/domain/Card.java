@@ -25,8 +25,9 @@ public class Card {
     @Column(name = "created_at", updatable = false)
     private LocalDateTime createdAt;
 
-    @Column(nullable = false)
-    private Long columnId;
+    @ManyToOne
+    @JoinColumn(name = "column_id", nullable = false)
+    private BoardColumn boardColumn;
 
     @PrePersist
     protected void onCreate() {
