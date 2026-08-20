@@ -1,6 +1,7 @@
 package com.taskboard.taskboard.controller;
 
 import com.taskboard.taskboard.domain.Card;
+import com.taskboard.taskboard.dto.CardResponse;
 import com.taskboard.taskboard.service.CardService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -15,8 +16,8 @@ public class CardController {
     private final CardService cardService;
 
     @GetMapping
-    public List<Card> getAllCards() {
-        return cardService.getAllCards();
+    public List<CardResponse> getAllCards() {
+        return cardService.getAllCardResponses();
     }
 
     @PostMapping
