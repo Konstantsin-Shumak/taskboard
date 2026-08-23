@@ -1,6 +1,7 @@
 package com.taskboard.taskboard.controller;
 
 import com.taskboard.taskboard.domain.Card;
+import com.taskboard.taskboard.dto.CardRequest;
 import com.taskboard.taskboard.dto.CardResponse;
 import com.taskboard.taskboard.service.CardService;
 import lombok.RequiredArgsConstructor;
@@ -21,7 +22,8 @@ public class CardController {
     }
 
     @PostMapping
-    public Card createCard(@RequestBody Card card) {
-        return cardService.createCard(card);
+    public CardResponse createCard(@RequestBody CardRequest cardRequest) {
+        Card savedCard = cardService.createCard(cardRequest);
+        return cardService.toResponse(savedCard);
     }
 }
