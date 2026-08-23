@@ -1,5 +1,6 @@
 package com.taskboard.taskboard.service;
 
+import com.taskboard.taskboard.exception.ColumnNotFoundException;
 import com.taskboard.taskboard.domain.BoardColumn;
 import com.taskboard.taskboard.domain.Card;
 import com.taskboard.taskboard.dto.CardResponse;
@@ -20,7 +21,7 @@ public class CardService {
 
     public Card createCard(CardRequest request) {
         BoardColumn column = boardColumnRepository.findById(request.getColumnId())
-                .orElseThrow();
+                .orElseThrow(() -> new ColumnNotFoundException("Column with id = " + request.getColumnId() + " not found"));
         Card card = new Card();
         card.setTitle(request.getTitle());
         card.setDescription(request.getDescription());
