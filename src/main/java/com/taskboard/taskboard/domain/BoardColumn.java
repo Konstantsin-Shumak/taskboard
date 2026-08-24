@@ -20,8 +20,9 @@ public class BoardColumn {
     @Column(nullable = false)
     private String title;
 
-    @Column(nullable = false)
-    private Long boardId;
+    @ManyToOne
+    @JoinColumn(name = "board_id", nullable = false)
+    private Board board;
 
     @Column
     private Integer position;
