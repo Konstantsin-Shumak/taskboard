@@ -26,6 +26,13 @@ public class BoardColumnService {
                 .toList();
     }
 
+    public List<BoardColumnResponse> getBoardColumnResponsesByBoardId(Long boardId){
+        return boardColumnsRepository.findByBoard_Id(boardId)
+                .stream()
+                .map(this::toResponse)
+                .toList();
+    }
+
     public BoardColumn createBoardColumn(BoardColumnRequest request) {
         Board board = boardRepository.findById(request.getBoardId())
                 .orElseThrow();
@@ -34,7 +41,7 @@ public class BoardColumnService {
         boardColumn.setTitle(request.getTitle());
         boardColumn.setBoard(board);
 
-        long existingCount = boardColumnsRepository.countByBoardId(boardColumn.getBoard().getId());
+        long existingCount = boardColumnsRepository.countByBoard_Id(boardColumn.getBoard().getId());
         boardColumn.setPosition((int) existingCount + 1);
         return boardColumnsRepository.save(boardColumn);
     }
