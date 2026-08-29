@@ -17,10 +17,9 @@ public class Board {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
-    private String title;
-
-    private String description;
+    @OneToOne
+    @JoinColumn(name = "project_id", nullable = false, unique = true)
+    private Project project;
 
     @Column(name = "created_at", updatable = false)
     private LocalDateTime createdAt;
